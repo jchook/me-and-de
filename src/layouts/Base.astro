@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/vollkorn';
+import '@fontsource-variable/vollkorn/wght-italic.css';
+import '@fontsource/vollkorn-sc/400.css';
+import '@fontsource/vollkorn-sc/600.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = 'Field notes from inside the German language, by an English speaker.' } = Astro.props;
+const pageTitle = title ? `${title} · Me & De` : 'Me & De';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Me & De" href={new URL('rss.xml', Astro.site)} />
+  </head>
+  <body>
+    <div class="page">
+      <div class="topmark" aria-hidden="true"></div>
+      <header class="masthead">
+        <a class="brand" href="/">Me &amp; De</a>
+        <nav class="mastnav">
+          <a href="/ueber/">Über</a>
+          <a href="/rss.xml">RSS</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="foot">
+        <div class="footmark" aria-hidden="true"></div>
+        <div class="foot-row">
+          <span class="foot-brand">Me &amp; De</span>
+          <nav class="foot-nav">
+            <a href="/ueber/">Über</a>
+            <a href="/impressum/">Impressum</a>
+            <a href="/rss.xml">RSS</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

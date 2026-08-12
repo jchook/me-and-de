@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import LevelMark from '../components/LevelMark.astro';
+import { LEVELS } from '../lib/levels';
+import { shortDate, isoDate } from '../lib/format';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+const latest = [...posts].sort((a, b) => +b.data.date - +a.data.date)[0];
+
+// Grouped by CEFR level, oldest first within each — it reads as a syllabus.
+const sections = LEVELS.map((level) => ({
+  ...level,
+  posts: posts
+    .filter((p) => p.data.level === level.code)
+    .sort((a, b) => +a.data.date - +b.data.date),
+})).filter((s) => s.posts.length > 0);
+---
+
+<Base>
+  <p class="standfirst">
+    Field notes from inside the German language, by an English speaker. Filed by <abbr title="Common European Framework of Reference for Languages">CEFR</abbr> level — the German thickens as we go.
+  </p>
+
+  {
+    latest && (
+      <p class="zuletzt">
+        <span class="sq" aria-hidden="true" />
+        <span class="zuletzt-label">Zuletzt</span>
+        <a href={`/posts/${latest.id}/`}>{latest.data.title}</a>
+        <time datetime={isoDate(latest.data.date)}>{shortDate(latest.data.date)}</time>
+      </p>
+    )
+  }
+
+  {
+    sections.map((section) => (
+      <section class="level">
+        <h2 class="level-head">
+          <LevelMark level={section.code} />
+          <span>{section.code}</span>
+          <span class="level-name">· {section.name}</span>
+        </h2>
+        <ul class="post-list">
+          {section.posts.map((post) => (
+            <li>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <span class="leader" aria-hidden="true"></span>
+              <time datetime={isoDate(post.data.date)}>{shortDate(post.data.date)}</time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

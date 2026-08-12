@@ -1,0 +1,493 @@
+/* ------------------------------------------------------------------ */
+/*  Me & De — monochrome print system.                                 */
+/*  One serif (Vollkorn) + its small-caps companion. Squares & rules.  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --paper: #fcfcfa;
+  --ink: #16150f;
+  --meta: #6d6a61;
+  --hairline: #16150f;
+  --rubric: #a3271e;
+
+  --serif: 'Vollkorn Variable', 'Vollkorn', Georgia, 'Times New Roman', serif;
+  --sc: 'Vollkorn SC', var(--serif);
+
+  --measure: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #171613;
+    --ink: #e9e5da;
+    --meta: #99948a;
+    --hairline: #e9e5da;
+    --rubric: #d0685c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.1875rem);
+  line-height: 1.62;
+  font-feature-settings: 'onum' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---- page frame ---------------------------------------------------- */
+
+.page {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding: 1.75rem 1.25rem 3rem;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* The anchor: a solid rule, a breath, a hairline. */
+.topmark {
+  border-top: 7px solid var(--ink);
+  border-bottom: 1px solid var(--hairline);
+  height: 8px;
+}
+
+/* Mirrored at the foot: hairline, a breath, solid. */
+.footmark {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 7px solid var(--ink);
+  height: 8px;
+}
+
+/* ---- small caps utility -------------------------------------------- */
+
+.sc {
+  font-family: var(--sc);
+  font-feature-settings: normal;
+  letter-spacing: 0.09em;
+  text-transform: lowercase; /* Vollkorn SC renders lowercase as small caps */
+}
+
+/* ---- masthead ------------------------------------------------------ */
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.9rem;
+  margin-bottom: 2.75rem;
+}
+
+.brand {
+  font-family: var(--sc);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--rubric);
+}
+
+.mastnav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.mastnav a,
+.foot-nav a {
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.mastnav a:hover,
+.foot-nav a:hover {
+  color: var(--rubric);
+}
+
+/* ---- footer -------------------------------------------------------- */
+
+.foot {
+  margin-top: 4.5rem;
+}
+
+.foot-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.8rem 0.2rem;
+}
+
+.foot-brand {
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+}
+
+.foot-nav {
+  display: flex;
+  gap: 1.2rem;
+}
+
+/* ---- index --------------------------------------------------------- */
+
+.standfirst {
+  font-style: italic;
+  color: var(--meta);
+  max-width: 34rem;
+  margin-bottom: 1.5rem;
+}
+
+/* recency pointer: the newest post, wherever it's filed */
+.zuletzt {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 3.2rem;
+}
+
+.zuletzt .sq {
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--ink);
+  flex-shrink: 0;
+}
+
+.zuletzt-label {
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+}
+
+.zuletzt a {
+  color: var(--ink);
+  text-decoration: none;
+  min-width: 0;
+}
+
+.zuletzt a:hover {
+  color: var(--rubric);
+}
+
+.zuletzt time {
+  font-family: var(--sc);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--meta);
+  white-space: nowrap;
+  font-feature-settings: normal;
+}
+
+.standfirst abbr {
+  text-decoration: none;
+  font-style: normal;
+  font-family: var(--sc);
+  font-size: 0.85em;
+  letter-spacing: 0.07em;
+}
+
+.level {
+  margin-bottom: 3rem;
+}
+
+.level-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--sc);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.11em;
+  text-transform: lowercase;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.55rem;
+  margin-bottom: 1.1rem;
+}
+
+.level-name {
+  font-weight: 400;
+  color: var(--meta);
+  letter-spacing: 0.09em;
+  min-width: 0;
+}
+
+/* the five-square proficiency meter */
+.levelmark {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.levelmark i {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--ink);
+}
+
+.levelmark i.on {
+  background: var(--ink);
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.post-list a {
+  color: var(--ink);
+  text-decoration: none;
+  min-width: 0;
+}
+
+.post-list a:hover {
+  color: var(--rubric);
+}
+
+/* classical table-of-contents dot leader */
+.leader {
+  flex: 1;
+  min-width: 2rem;
+  border-bottom: 1px dotted var(--meta);
+  transform: translateY(-0.28em);
+}
+
+.post-list time {
+  font-family: var(--sc);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--meta);
+  white-space: nowrap;
+  font-feature-settings: normal;
+}
+
+/* ---- post page ----------------------------------------------------- */
+
+.post-head {
+  margin-bottom: 2.4rem;
+}
+
+.post-head h1 {
+  font-size: clamp(1.85rem, 1.4rem + 2.2vw, 2.5rem);
+  font-weight: 560;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.1rem;
+  text-wrap: balance;
+}
+
+/* the divider: a black square, then the date */
+.post-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+  font-feature-settings: normal;
+}
+
+.post-meta .sq {
+  width: 0.62em;
+  height: 0.62em;
+  background: var(--ink);
+  flex-shrink: 0;
+  transform: translateY(-0.05em);
+}
+
+/* ---- prose --------------------------------------------------------- */
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose p {
+  margin-bottom: 1.15em;
+}
+
+.prose h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.25;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.35rem;
+  margin: 2.2em 0 0.9em;
+}
+
+.prose h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.8em 0 0.7em;
+}
+
+.prose a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 120ms ease;
+}
+
+.prose a:hover {
+  color: var(--rubric);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--ink);
+  padding-left: 1.15rem;
+  margin: 1.4em 0;
+  font-style: italic;
+  color: var(--meta);
+}
+
+.prose blockquote em {
+  font-style: normal;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+  margin-bottom: 1.15em;
+}
+
+.prose ul {
+  list-style: square;
+}
+
+.prose li {
+  margin-bottom: 0.35em;
+}
+
+.prose li::marker {
+  color: var(--ink);
+}
+
+/* section break: three small squares */
+.prose hr {
+  border: 0;
+  margin: 2.2em 0;
+  display: flex;
+  justify-content: center;
+}
+
+.prose hr::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--ink);
+  box-shadow: 14px 0 var(--ink), -14px 0 var(--ink);
+}
+
+.prose code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  padding: 0.1em 0.35em;
+}
+
+.prose strong {
+  font-weight: 640;
+}
+
+/* end-of-article tombstone */
+.tombstone {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2.4rem;
+}
+
+.tombstone::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--ink);
+}
+
+.post-foot {
+  margin-top: 2.6rem;
+}
+
+.post-foot a {
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+  text-decoration: none;
+}
+
+.post-foot a:hover {
+  color: var(--rubric);
+}
+
+/* ---- small screens ------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .post-list li {
+    gap: 0.6rem;
+  }
+
+  .level-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
