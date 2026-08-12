@@ -34,5 +34,9 @@ frontmatter drives the index grouping. Keep them in agreement.
 | `npm run build`   | Build the static site to `./dist/`  |
 | `npm run preview` | Preview the production build        |
 
-Before deploying, set the real domain in `astro.config.mjs` (`site`) — RSS and
-canonical URLs use it.
+## Deploying
+
+Every push to `main` deploys automatically: GitHub Actions builds the site and
+rsyncs `dist/` to `/var/www/meandde.com/htdocs` on `texas`, where Caddy serves
+it as [meandde.com](https://meandde.com). The deploy key (repo secret
+`DEPLOY_SSH_KEY`) is rrsync-restricted on the server to that directory only.
