@@ -1,5 +1,5 @@
 ---
-title: How to Gossip Responsibly
+title: German Has a Verb Form for Plausible Deniability
 date: 2026-08-12
 level: C1
 description: Der Konjunktiv I — German builds plausible deniability directly into the verb.

@@ -1,5 +1,5 @@
 ---
-title: The Seasoning Words
+title: German’s Tiny Words With Private Emotional Lives
 date: 2026-08-02
 level: B2
 description: Modalpartikeln — words that mean nothing and change everything.

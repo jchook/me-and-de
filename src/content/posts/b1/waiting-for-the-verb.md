@@ -1,5 +1,5 @@
 ---
-title: Waiting for the Verb
+title: Where German Hides the Verb
 date: 2026-07-26
 level: B1
 description: In a German subordinate clause, the verb arrives last, like the detective in the final chapter.

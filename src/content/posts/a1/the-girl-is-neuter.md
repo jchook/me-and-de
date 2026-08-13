@@ -1,5 +1,5 @@
 ---
-title: The Girl Is Neuter
+title: Why German Calls a Girl “It”
 date: 2026-07-05
 level: A1
 description: On German grammatical gender, and the specific tragedy of das Mädchen.

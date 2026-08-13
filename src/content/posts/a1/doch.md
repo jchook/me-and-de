@@ -1,5 +1,5 @@
 ---
-title: Doch
+title: The German Word That Makes “Yes” Less Confusing
 date: 2026-07-12
 level: A1
 description: The one-syllable rebuttal English has been missing for a thousand years.

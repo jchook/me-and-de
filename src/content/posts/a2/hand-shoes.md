@@ -1,5 +1,5 @@
 ---
-title: Hand Shoes
+title: German Describes Things Instead of Naming Them
 date: 2026-07-19
 level: A2
 description: German does not name things. It describes them, once, around 1750, and moves on.
