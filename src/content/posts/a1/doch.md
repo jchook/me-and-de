@@ -5,6 +5,8 @@ level: A1
 description: The one-syllable rebuttal English has been missing for a thousand years.
 ---
 
+Today’s study note is a formal complaint: German has given one small word a job that English handles with confusion, repetition, and somebody asking what the other person meant.
+
 *Doch* reverses a negative statement.
 
 — *Du kommst nicht mit.* (You're not coming.)
@@ -17,7 +19,7 @@ It is especially useful with negative questions. In English, an answer to “You
 
 “Yes.”
 
-Does that mean “yes, I’m not hungry,” or “yes, I am hungry”? Usually somebody has to ask a follow-up question.
+Does that mean “yes, I’m not hungry,” or “yes, I am hungry”? Usually somebody has to ask a follow-up question. English has made this everybody’s problem.
 
 German has *ja* for yes, *nein* for no, and *doch* for correcting a negative assumption.
 

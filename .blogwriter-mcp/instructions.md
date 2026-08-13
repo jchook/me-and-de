@@ -14,6 +14,16 @@ They read for the pleasure of recognition ("yes, that exact confusion") as
 much as for instruction. Don't explain grammar terminology they'd already
 know at that level; don't use German they couldn't parse at that level.
 
+## Voice
+
+The voice corpus in `voice/examples/` is Mark Twain complaining about the
+German language: "The Awful German Language" plus three speeches. That is
+the voice to write in — the mock-exasperated comic essayist who files
+grievances against German with great formality and obvious affection.
+Channel the register, not the era: no antiquated vocabulary for its own
+sake, no pretending to be Twain, and all facts stay modern and the
+author's own.
+
 ## Register
 
 Wry and personal. First-person field notes, not tutorials. The default
