@@ -5,7 +5,7 @@ level: A2
 description: German does not name things. It describes them, once, around 1750, and moves on.
 ---
 
-English names things. German describes them — once, definitively, sometime around 1750 — and moves on, considering the matter closed.
+German compound nouns often describe a thing by joining together simpler words.
 
 - *die Handschuhe* — hand shoes (gloves)
 - *der Kühlschrank* — cold cupboard (refrigerator)
@@ -14,12 +14,18 @@ English names things. German describes them — once, definitively, sometime aro
 - *das Faultier* — lazy animal (sloth)
 - *die Nacktschnecke* — naked snail (slug)
 
-Note the sloth. English named it after one of the seven deadly sins. German looked at the same animal and wrote down an observation. For once, English is the judgmental one.
+The sloth is a useful comparison. English named it after one of the seven deadly sins. German names the behaviour it notices: a lazy animal.
 
-Where description would take too long, German engineers reached for *das Zeug* — stuff. An airplane is *das Flugzeug*, fly-stuff. A toy is *das Spielzeug*, play-stuff. A lighter is *das Feuerzeug*, fire-stuff. Somewhere there was a meeting about what to call the lighter, and the meeting was short.
+The same pattern appears in words ending in *-zeug*, meaning stuff:
 
-The result is that A2 German occasionally hands you a sentence of perfect, self-assembling clarity:
+- *das Flugzeug* — fly-stuff (airplane)
+- *das Spielzeug* — play-stuff (toy)
+- *das Feuerzeug* — fire-stuff (lighter)
+
+That made this sentence unusually easy for me to read:
 
 *Mein Feuerzeug ist im Handschuh.*
 
-My fire-stuff is in my hand-shoe. I understood that sentence on the first read, which is more than I can say for English, a language in which *flammable* and *inflammable* mean the same thing.
+My fire-stuff is in my hand-shoe.
+
+I understood it on the first read, which is more than I can say for English, where *flammable* and *inflammable* mean the same thing.

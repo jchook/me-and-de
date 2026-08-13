@@ -7,12 +7,20 @@ description: In a German subordinate clause, the verb arrives last, like the det
 
 *Ich weiß, dass du den Kuchen, den meine Mutter gestern mit großer Liebe für die Party gebacken hat, ohne mich gegessen hast.*
 
-Read that again and notice where you learn what happened to the cake: the last word. *Gegessen hast* — you ate it. Everything before that is evidence being entered into the record. The cake, my mother, yesterday, the great love, the party, the absence of me — all of it held in the air, like a waiter stacking plates, until the verb arrives and the sentence detonates in order.
+The important part of this sentence arrives at the end: *gegessen hast*. You ate the cake.
 
-In a German subordinate clause the verb goes to the end. Not near the end. *The* end. Twain, again, from the field:
+Until then, German makes you carry a lot of information. There is a cake. My mother baked it yesterday, with great love, for a party. You ate it without me. But the sentence does not tell you what you did with the cake until its final words.
+
+This is verb-final order in a German subordinate clause. The clause begins with *dass*, and its verb comes at the end:
+
+*Ich weiß, dass du den Kuchen gegessen hast.*
+
+The longer sentence works the same way. German can add descriptions, time, place, and even another clause before it reaches the verb. The structure stays intact, but the meaning can remain unresolved until the end.
+
+Mark Twain noticed this too:
 
 > Whenever the literary German dives into a sentence, that is the last you are going to see of him till he emerges on the other side of his Atlantic with his verb in his mouth.
 
-This is also why you cannot interrupt a German speaker. It is not politeness. It is engineering. Until the verb lands, the sentence has no truth value — there is simply nothing yet to disagree with. German small talk is structurally suspenseful.
+This is why interrupting a German subordinate clause before the verb arrives can be difficult. You may know who or what the speaker is talking about, but you may not yet know what happened.
 
-My favorite consequence: simultaneous interpreters of German are, for seconds at a time, professionally guessing.
+It also creates a practical problem for simultaneous interpreters. When they interpret German into another language, they sometimes have to anticipate the verb before they have heard it.

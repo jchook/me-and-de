@@ -5,20 +5,26 @@ level: A1
 description: The one-syllable rebuttal English has been missing for a thousand years.
 ---
 
-The best word I have learned so far is four letters long and constitutes a complete argument.
+*Doch* reverses a negative statement.
 
 — *Du kommst nicht mit.* (You're not coming.)
 
 — *Doch.*
 
-That's the whole exchange. *Doch* reverses a negative statement. In English the same move takes an entire clause — "on the contrary, I am, actually" — delivered while the moment passes. German has compressed the counterattack into one syllable, pre-loaded, safety off.
+The first speaker says that I am not coming. *Doch* means that this is wrong: I am coming.
 
-It also repairs a bug English has shipped with for centuries. Answer this: "You're not hungry?" — "Yes."
+It is especially useful with negative questions. In English, an answer to “You’re not hungry?” can be confusing.
 
-Yes *what*? Yes, correct, not hungry? Yes, I am hungry? English speakers resolve this with follow-up questions and mild social damage. German simply has a third value: *ja* for yes, *nein* for no, and *doch* for *your negative assumption is wrong and I am overturning it*.
+“Yes.”
+
+Does that mean “yes, I’m not hungry,” or “yes, I am hungry”? Usually somebody has to ask a follow-up question.
+
+German has *ja* for yes, *nein* for no, and *doch* for correcting a negative assumption.
 
 *Hast du keine Fragen?* — *Doch.*
 
-I have started deploying it in English conversations. People hate it.
+This means: “Don’t you have any questions?” “Actually, I do.”
 
-Doch.
+I have started deploying *doch* in English conversations. People hate it.
+
+*Doch.*

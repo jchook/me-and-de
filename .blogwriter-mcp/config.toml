@@ -1,0 +1,7 @@
+[model]
+model = "gpt-5.6-terra"
+
+[voice]
+# Published posts are AI-written and live in voice/avoid/ as anti-examples.
+# Do NOT add src/content/posts/**/*.md here until posts are hand-written.
+include = []
