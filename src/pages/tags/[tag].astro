@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { tagDef } from '../../lib/tags';
+import { shortDate, isoDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => p.data.tags.includes(tag))
+        .sort((a, b) => +a.data.date - +b.data.date),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const def = tagDef(tag);
+---
+
+<Base title={def.label}>
+  <header class="post-head">
+    <h1>{def.label}</h1>
+    <p class="post-meta">
+      <span class="sq" aria-hidden="true"></span>
+      <span>{posts.length} {posts.length === 1 ? 'Beitrag' : 'Beiträge'}</span>
+    </p>
+  </header>
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+          <span class="leader" aria-hidden="true" />
+          <time datetime={isoDate(post.data.date)}>{shortDate(post.data.date)}</time>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

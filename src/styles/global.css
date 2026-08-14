@@ -300,6 +300,21 @@ main {
   color: var(--rubric);
 }
 
+/* little tag label after a title in the index (wotd, fwotd, …) */
+.tag-chip {
+  font-family: var(--sc);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  font-feature-settings: normal;
+  color: var(--meta);
+  border: 1px solid var(--meta);
+  padding: 0 0.4em 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transform: translateY(-0.12em);
+}
+
 /* classical table-of-contents dot leader */
 .leader {
   flex: 1;
@@ -351,6 +366,47 @@ main {
   background: var(--ink);
   flex-shrink: 0;
   transform: translateY(-0.05em);
+}
+
+.post-meta a.tag {
+  color: var(--meta);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.post-meta a.tag:hover {
+  color: var(--rubric);
+}
+
+/* auto-inserted note for tagged posts (see src/lib/tags.ts) */
+.tag-note {
+  border: 1px solid var(--hairline);
+  border-left-width: 7px;
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 2.2rem;
+  font-style: italic;
+  color: var(--meta);
+}
+
+.tag-note em {
+  font-style: normal;
+}
+
+.tag-note-label {
+  display: block;
+  font-family: var(--sc);
+  font-style: normal;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--rubric);
+  margin-bottom: 0.25rem;
+}
+
+.prose + .tag-note {
+  margin-top: 2.2rem;
+  margin-bottom: 0;
 }
 
 /* ---- prose --------------------------------------------------------- */
@@ -447,6 +503,54 @@ main {
   font-weight: 640;
 }
 
+/* ---- callouts (> [!NOTE] etc. in markdown) ------------------------- */
+
+.prose .callout {
+  margin: 1.6em 0;
+  padding: 0.85rem 1.15rem;
+  border-left: 2px solid var(--ink);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+
+.prose .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+.prose .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: lowercase;
+  color: var(--meta);
+  margin-bottom: 0.5em;
+}
+
+.prose .callout-title::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  flex: none;
+  background: var(--ink);
+}
+
+.prose [data-callout='warning'],
+.prose [data-callout='caution'] {
+  border-left-color: var(--rubric);
+}
+
+.prose [data-callout='warning'] .callout-title,
+.prose [data-callout='caution'] .callout-title {
+  color: var(--rubric);
+}
+
+.prose [data-callout='warning'] .callout-title::before,
+.prose [data-callout='caution'] .callout-title::before {
+  background: var(--rubric);
+}
+
 /* end-of-article tombstone */
 .tombstone {
   display: flex;
@@ -463,6 +567,14 @@ main {
 
 .post-foot {
   margin-top: 2.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.post-foot .foot-next {
+  text-align: right;
 }
 
 .post-foot a {
@@ -489,5 +601,14 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .post-foot {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .post-foot .foot-next {
+    text-align: left;
   }
 }

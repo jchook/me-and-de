@@ -2,17 +2,30 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { longDate, isoDate } from '../../lib/format';
+import { LEVELS } from '../../lib/levels';
+import { tagDef } from '../../lib/tags';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
-  return posts.map((post) => ({
+  // Same reading order as the index: by level, oldest first within each.
+  const levelRank = new Map(LEVELS.map((l, i) => [l.code, i]));
+  const ordered = [...posts].sort(
+    (a, b) =>
+      levelRank.get(a.data.level) - levelRank.get(b.data.level) ||
+      +a.data.date - +b.data.date
+  );
+  return ordered.map((post, i) => ({
     params: { slug: post.id },
-    props: { post },
+    props: { post, prev: ordered[i - 1] ?? null, next: ordered[i + 1] ?? null },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
+
+const tags = post.data.tags.map(tagDef);
+const headerNotes = tags.filter((t) => t.note?.placement === 'header');
+const footerNotes = tags.filter((t) => t.note?.placement === 'footer');
 ---
 
 <Base title={post.data.title} description={post.data.description}>
@@ -23,14 +36,48 @@ const { Content } = await render(post);
         <span class="sq" aria-hidden="true"></span>
         <time datetime={isoDate(post.data.date)}>{longDate(post.data.date)}</time>
         <span>· {post.data.level}</span>
+        {tags.map((t) => <span>· <a class="tag" href={`/tags/${t.code}/`}>{t.label}</a></span>)}
       </p>
     </header>
+    {
+      headerNotes.map((t) => (
+        <aside class="tag-note">
+          <span class="tag-note-label">Hinweis</span>
+          <p set:html={t.note.html} />
+        </aside>
+      ))
+    }
     <div class="prose">
       <Content />
     </div>
+    {
+      footerNotes.map((t) => (
+        <aside class="tag-note">
+          <span class="tag-note-label">Hinweis</span>
+          <p set:html={t.note.html} />
+        </aside>
+      ))
+    }
     <div class="tombstone" aria-hidden="true"></div>
-    <nav class="post-foot">
-      <a href="/">← Inhalt</a>
+    <nav class="post-foot" aria-label="Weiterlesen">
+      {
+        prev ? (
+          <a class="foot-prev" href={`/posts/${prev.id}/`} rel="prev">
+            ← {prev.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next ? (
+          <a class="foot-next" href={`/posts/${next.id}/`} rel="next">
+            {next.data.title} →
+          </a>
+        ) : (
+          <span />
+        )
+      }
     </nav>
   </article>
 </Base>

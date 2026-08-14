@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import LevelMark from '../components/LevelMark.astro';
 import { LEVELS } from '../lib/levels';
 import { shortDate, isoDate } from '../lib/format';
+import { tagDef } from '../lib/tags';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
 
@@ -45,6 +46,10 @@ const sections = LEVELS.map((level) => ({
         <ul class="post-list">
           {section.posts.map((post) => (
             <li>
+              {post.data.tags.map((c) => {
+                const t = tagDef(c);
+                return <span class="tag-chip">{t.short ?? t.code}</span>;
+              })}
               <a href={`/posts/${post.id}/`}>{post.data.title}</a>
               <span class="leader" aria-hidden="true"></span>
               <time datetime={isoDate(post.data.date)}>{shortDate(post.data.date)}</time>
