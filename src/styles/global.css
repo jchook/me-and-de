@@ -378,21 +378,29 @@ main {
   color: var(--rubric);
 }
 
-/* auto-inserted note for tagged posts (see src/lib/tags.ts) */
-.tag-note {
+/* One look for every Hinweis box: the auto-inserted tag note
+   (src/lib/tags.ts) and > [!NOTE]-style markdown callouts. */
+.tag-note,
+.prose .callout {
   border: 1px solid var(--hairline);
   border-left-width: 7px;
   padding: 0.85rem 1.15rem;
-  margin-bottom: 2.2rem;
+  margin: 1.6em 0;
   font-style: italic;
   color: var(--meta);
 }
 
-.tag-note em {
+.tag-note {
+  margin: 0 0 2.2rem;
+}
+
+.tag-note em,
+.prose .callout em {
   font-style: normal;
 }
 
-.tag-note-label {
+.tag-note-label,
+.prose .callout-title {
   display: block;
   font-family: var(--sc);
   font-style: normal;
@@ -504,51 +512,15 @@ main {
 }
 
 /* ---- callouts (> [!NOTE] etc. in markdown) ------------------------- */
-
-.prose .callout {
-  margin: 1.6em 0;
-  padding: 0.85rem 1.15rem;
-  border-left: 2px solid var(--ink);
-  background: color-mix(in srgb, var(--ink) 4%, transparent);
-}
+/* Box + title styling is shared with .tag-note above. */
 
 .prose .callout-content > :last-child {
   margin-bottom: 0;
 }
 
-.prose .callout-title {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: var(--sc);
-  font-size: 0.85rem;
-  letter-spacing: 0.09em;
-  text-transform: lowercase;
-  color: var(--meta);
-  margin-bottom: 0.5em;
-}
-
-.prose .callout-title::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  flex: none;
-  background: var(--ink);
-}
-
 .prose [data-callout='warning'],
 .prose [data-callout='caution'] {
   border-left-color: var(--rubric);
-}
-
-.prose [data-callout='warning'] .callout-title,
-.prose [data-callout='caution'] .callout-title {
-  color: var(--rubric);
-}
-
-.prose [data-callout='warning'] .callout-title::before,
-.prose [data-callout='caution'] .callout-title::before {
-  background: var(--rubric);
 }
 
 /* end-of-article tombstone */
