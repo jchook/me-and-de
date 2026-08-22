@@ -27,7 +27,7 @@ export const TAGS: Record<string, TagDef> = {
     short: 'fwotd',
     note: {
       placement: 'footer',
-      html: 'When you read my <em>funny word of the day</em>, it is best to do so in an exaggerated German accent 🇩🇪.',
+      html: 'When you read my "funny word of the day", it is best to do so in an exaggerated german accent 🇩🇪.',
     },
   },
 };
