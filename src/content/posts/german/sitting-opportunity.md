@@ -1,7 +1,6 @@
 ---
 title: "Sitzgelegenheit"
 date: 2026-08-13
-level: A2
 tags: [fwotd]
 ---
 

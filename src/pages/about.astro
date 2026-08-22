@@ -1,15 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
 ---
 
-<Base title="Über" description="About Me & De.">
+<Base title="About" description={`About ${SITE.short}.`}>
   <article>
     <header class="post-head">
-      <h1>Über</h1>
-      <p class="post-meta">
-        <span class="sq" aria-hidden="true"></span>
-        <span>about, roughly</span>
-      </p>
+      <h1>About</h1>
     </header>
     <div class="prose">
       <p>
@@ -47,9 +44,8 @@ import Base from '../layouts/Base.astro';
         </li>
       </ul>
     </div>
-    <div class="tombstone" aria-hidden="true"></div>
     <nav class="post-foot">
-      <a href="/">← Inhalt</a>
+      <a href="/">← Home</a>
     </nav>
   </article>
 </Base>

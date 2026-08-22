@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES, categoryDef, categoryOf } from '../../lib/categories';
+import { tagDef } from '../../lib/tags';
+import { shortDate, isoDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const cats = [...new Set([...Object.keys(CATEGORIES), ...posts.map((p) => categoryOf(p.id))])];
+  return cats.map((category) => ({
+    params: { category },
+    props: {
+      category,
+      posts: posts
+        .filter((p) => categoryOf(p.id) === category)
+        .sort((a, b) => +b.data.date - +a.data.date),
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+const def = categoryDef(category);
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].map(tagDef);
+---
+
+<Base title={def.label} description={def.intro}>
+  <header class="post-head">
+    <h1 style={def.accent ? `--cat: var(--accent-${def.accent})` : undefined}>
+      <span class="bar" aria-hidden="true"></span>{def.label}
+    </h1>
+    {def.intro && <p class="intro">{def.intro}</p>}
+    {
+      tags.length > 0 && (
+        <p class="post-meta">
+          {tags.map((t, i) => (
+            <span>{i > 0 && '· '}<a class="tag" href={`/tags/${t.code}/`}>{t.label}</a></span>
+          ))}
+        </p>
+      )
+    }
+  </header>
+  {posts.length === 0 && <p class="post-meta">Nothing here yet.</p>}
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/${post.id}/`}>{post.data.title}</a>
+          <time datetime={isoDate(post.data.date)}>{shortDate(post.data.date)}</time>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

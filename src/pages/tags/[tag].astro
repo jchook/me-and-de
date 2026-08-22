@@ -13,7 +13,7 @@ export async function getStaticPaths() {
       tag,
       posts: posts
         .filter((p) => p.data.tags.includes(tag))
-        .sort((a, b) => +a.data.date - +b.data.date),
+        .sort((a, b) => +b.data.date - +a.data.date),
     },
   }));
 }
@@ -26,16 +26,14 @@ const def = tagDef(tag);
   <header class="post-head">
     <h1>{def.label}</h1>
     <p class="post-meta">
-      <span class="sq" aria-hidden="true"></span>
-      <span>{posts.length} {posts.length === 1 ? 'Beitrag' : 'Beiträge'}</span>
+      <span>{posts.length} {posts.length === 1 ? 'post' : 'posts'}</span>
     </p>
   </header>
   <ul class="post-list">
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.id}/`}>{post.data.title}</a>
-          <span class="leader" aria-hidden="true" />
+          <a href={`/${post.id}/`}>{post.data.title}</a>
           <time datetime={isoDate(post.data.date)}>{shortDate(post.data.date)}</time>
         </li>
       ))

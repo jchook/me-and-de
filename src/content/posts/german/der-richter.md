@@ -1,7 +1,6 @@
 ---
 title: "der Richter"
 date: 2026-08-07
-level: A2
 tags: [wotd]
 ---
 

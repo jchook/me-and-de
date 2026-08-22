@@ -1,17 +1,21 @@
 ---
-import '@fontsource-variable/vollkorn';
-import '@fontsource-variable/vollkorn/wght-italic.css';
-import '@fontsource/vollkorn-sc/400.css';
-import '@fontsource/vollkorn-sc/600.css';
+import '@fontsource-variable/inconsolata';
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import { allCategories } from '../lib/categories';
+import { SITE } from '../lib/site';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { title, description = 'Field notes from inside the German language, by an English speaker.' } = Astro.props;
-const pageTitle = title ? `${title} · Me & De` : 'Me & De';
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE.short}` : SITE.robust;
+
+const navCats = allCategories(
+  (await getCollection('posts', ({ data }) => !data.draft)).map((p) => p.id)
+);
 ---
 
 <!doctype html>
@@ -20,18 +24,29 @@ const pageTitle = title ? `${title} · Me & De` : 'Me & De';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#262626" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title="Me & De" href={new URL('rss.xml', Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.short} href={new URL('rss.xml', Astro.site)} />
   </head>
   <body>
     <div class="page">
-      <div class="topmark" aria-hidden="true"></div>
       <header class="masthead">
-        <a class="brand" href="/">Me &amp; De</a>
+        <a class="brand" href="/"><span class="bar" aria-hidden="true"></span>{SITE.short}</a>
         <nav class="mastnav">
-          <a href="/ueber/">Über</a>
+          {
+            navCats.map((c) => (
+              <a
+                class="cat"
+                href={`/${c.code}/`}
+                style={c.accent ? `--cat: var(--accent-${c.accent})` : undefined}
+              >
+                <span class="bar" aria-hidden="true" />{c.label}
+              </a>
+            ))
+          }
+          <a href="/about/">About</a>
           <a href="/rss.xml">RSS</a>
         </nav>
       </header>
@@ -39,11 +54,10 @@ const pageTitle = title ? `${title} · Me & De` : 'Me & De';
         <slot />
       </main>
       <footer class="foot">
-        <div class="footmark" aria-hidden="true"></div>
         <div class="foot-row">
-          <span class="foot-brand">Me &amp; De</span>
+          <span class="foot-brand">{SITE.short}</span>
           <nav class="foot-nav">
-            <a href="/ueber/">Über</a>
+            <a href="/about/">About</a>
             <a href="/impressum/">Impressum</a>
             <a href="/rss.xml">RSS</a>
           </nav>

@@ -1,30 +1,31 @@
-# Me & De
+# fused
 
-*Me and DE. Also: mäandern, to meander.*
-
-Field notes from inside the German language, by an English speaker. Posts are
-filed by CEFR level (A1–C1) and get more German as they go.
+A blog. Posts are filed by category (folder) and listed chronologically.
+The brand (short/robust forms, site description) lives in `src/lib/site.ts`.
 
 Built with [Astro](https://astro.build). No client-side JavaScript.
 
 ## Writing a post
 
-Drop a Markdown file in `src/content/posts/<level>/`:
+Drop a Markdown file in `src/content/posts/<category>/`:
 
 ```markdown
 ---
 title: The Girl Is Neuter
 date: 2026-07-05
-level: A1            # A1 | A2 | B1 | B2 | C1
 description: Optional, used for meta tags and RSS only — never displayed.
+tags: [wotd]         # optional
 draft: true          # optional, hides the post
 ---
 
 Body goes here. Keep it short.
 ```
 
-The folder (`a1/`, `b2/`, …) sets the URL (`/posts/a1/slug/`); the `level`
-frontmatter drives the index grouping. Keep them in agreement.
+The folder is the category and sets the URL (`/<category>/<slug>/`). Each
+category with posts gets a page at `/<category>/` (its tags + recent posts)
+and a link in the masthead nav. Category labels and optional intro lines live
+in `src/lib/categories.ts`; tag labels and notes in `src/lib/tags.ts`. Both
+fall back to the raw code, so unregistered categories and tags still work.
 
 ## Commands
 

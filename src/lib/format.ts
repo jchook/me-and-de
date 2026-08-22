@@ -1,17 +1,15 @@
-// Dates are set in German on purpose: long form on posts ("5. Juli 2026"),
-// DIN-flavored numeric form in the index ("05.07.2026").
 // timeZone UTC: frontmatter dates parse as UTC midnight, so local-time
 // formatting would shift them a day backwards west of Greenwich.
-const long = new Intl.DateTimeFormat('de-DE', {
+const long = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'long',
   year: 'numeric',
   timeZone: 'UTC',
 });
 
-const short = new Intl.DateTimeFormat('de-DE', {
-  day: '2-digit',
-  month: '2-digit',
+const short = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
   year: 'numeric',
   timeZone: 'UTC',
 });

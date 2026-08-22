@@ -2,27 +2,31 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { longDate, isoDate } from '../../lib/format';
-import { LEVELS } from '../../lib/levels';
+import { categoryDef, categoryOf, slugOf } from '../../lib/categories';
 import { tagDef } from '../../lib/tags';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
-  // Same reading order as the index: by level, oldest first within each.
-  const levelRank = new Map(LEVELS.map((l, i) => [l.code, i]));
-  const ordered = [...posts].sort(
-    (a, b) =>
-      levelRank.get(a.data.level) - levelRank.get(b.data.level) ||
-      +a.data.date - +b.data.date
-  );
-  return ordered.map((post, i) => ({
-    params: { slug: post.id },
-    props: { post, prev: ordered[i - 1] ?? null, next: ordered[i + 1] ?? null },
-  }));
+  const byCat = new Map();
+  for (const p of posts) {
+    const c = categoryOf(p.id);
+    if (!byCat.has(c)) byCat.set(c, []);
+    byCat.get(c).push(p);
+  }
+  return [...byCat.entries()].flatMap(([category, group]) => {
+    // Prev/next read chronologically within the category.
+    const ordered = group.sort((a, b) => +a.data.date - +b.data.date);
+    return ordered.map((post, i) => ({
+      params: { category, slug: slugOf(post.id) },
+      props: { post, category, prev: ordered[i - 1] ?? null, next: ordered[i + 1] ?? null },
+    }));
+  });
 }
 
-const { post, prev, next } = Astro.props;
+const { post, category, prev, next } = Astro.props;
 const { Content } = await render(post);
 
+const cat = categoryDef(category);
 const tags = post.data.tags.map(tagDef);
 const headerNotes = tags.filter((t) => t.note?.placement === 'header');
 const footerNotes = tags.filter((t) => t.note?.placement === 'footer');
@@ -33,16 +37,19 @@ const footerNotes = tags.filter((t) => t.note?.placement === 'footer');
     <header class="post-head">
       <h1>{post.data.title}</h1>
       <p class="post-meta">
-        <span class="sq" aria-hidden="true"></span>
         <time datetime={isoDate(post.data.date)}>{longDate(post.data.date)}</time>
-        <span>· {post.data.level}</span>
+        <span>· <a
+          class="cat"
+          href={`/${cat.code}/`}
+          style={cat.accent ? `--cat: var(--accent-${cat.accent})` : undefined}
+        >{cat.label}</a></span>
         {tags.map((t) => <span>· <a class="tag" href={`/tags/${t.code}/`}>{t.label}</a></span>)}
       </p>
     </header>
     {
       headerNotes.map((t) => (
         <aside class="tag-note">
-          <span class="tag-note-label">Hinweis</span>
+          <span class="tag-note-label">Note</span>
           <p set:html={t.note.html} />
         </aside>
       ))
@@ -53,16 +60,15 @@ const footerNotes = tags.filter((t) => t.note?.placement === 'footer');
     {
       footerNotes.map((t) => (
         <aside class="tag-note">
-          <span class="tag-note-label">Hinweis</span>
+          <span class="tag-note-label">Note</span>
           <p set:html={t.note.html} />
         </aside>
       ))
     }
-    <div class="tombstone" aria-hidden="true"></div>
-    <nav class="post-foot" aria-label="Weiterlesen">
+    <nav class="post-foot" aria-label="More">
       {
         prev ? (
-          <a class="foot-prev" href={`/posts/${prev.id}/`} rel="prev">
+          <a class="foot-prev" href={`/${prev.id}/`} rel="prev">
             ← {prev.data.title}
           </a>
         ) : (
@@ -71,7 +77,7 @@ const footerNotes = tags.filter((t) => t.note?.placement === 'footer');
       }
       {
         next ? (
-          <a class="foot-next" href={`/posts/${next.id}/`} rel="next">
+          <a class="foot-next" href={`/${next.id}/`} rel="next">
             {next.data.title} →
           </a>
         ) : (
