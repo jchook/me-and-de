@@ -178,43 +178,6 @@ main {
   color: var(--fg-muted);
 }
 
-/* ---- shelf --------------------------------------------------------- */
-/* The wallpaper, regenerated from the collection: one lone bar (the
-   constant), a silence, then one bar per category. Home page only. */
-
-.shelf {
-  display: flex;
-  align-items: flex-start;
-  margin: 1rem 0 4rem;
-}
-
-.shelf-me,
-.shelf-cats a {
-  width: 0.5rem;
-  height: 3.25rem;
-  border-radius: 999px;
-}
-
-.shelf-me {
-  margin-left: 13%;
-  background: var(--accent-1);
-}
-
-.shelf-cats {
-  display: flex;
-  gap: 0.6rem;
-  margin-left: 33%;
-}
-
-.shelf-cats a {
-  background: var(--cat, var(--rule));
-  transition: transform 120ms ease;
-}
-
-.shelf-cats a:hover {
-  transform: scaleY(1.08);
-}
-
 /* ---- post lists ---------------------------------------------------- */
 
 .post-list {
